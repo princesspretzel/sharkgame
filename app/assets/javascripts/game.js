@@ -77,30 +77,15 @@ game_state.main.prototype = {
       this.seal.body.velocity.x = +(Math.floor(Math.random()*500)+200); 
       // Kill the seal when it's no longer visible 
       this.seal.outOfBoundsKill = true;
-
-        // add_seal: function(x, y){
-        //   // Get the first dead seal of our group (they default to dead)
-        //   var seal = this.seals.getFirstDead();
-        //   // Set the new position of the seal
-        //   seal.reset(x, y);
-        // },
-
-        // add_row_of_seals: function() {  
-        // var hole = Math.floor(Math.random()*3)+1;
-
-        // for (var i = 0; i < 8; i++)
-        //    if (i != hole && i != hole +1) 
-        //    this.add_one_seal(0, 0);   
-        // },
     },
     
     // Function called 60 times per second
     update: function() {
-    //this.game.physics.overlap(this.shark, this.seal, eat, null, this);
+      this.game.physics.overlap(this.shark, this.seal, this.eat, null, this);
     },
 
     // Destroys seals
-    eat: function () {
+    eat: function (shark, seal) {
       seal.kill();
     },
 
