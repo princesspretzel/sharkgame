@@ -21,6 +21,7 @@ game_state.main.prototype = {
     this.game.load.spritesheet('shark', '/assets/shark.png', 160, 0);
     // Load bait sprites
     this.game.load.spritesheet('seal', '/assets/seal_right.png', 0, 79);
+    this.game.load.image('swimmer', '/assets/swimmer_right.png')
     },
 
     // Function called after 'preload' to set up the game
@@ -36,8 +37,9 @@ game_state.main.prototype = {
       // Every second loop to timeUp for constant health and score updating
       this.game.time.events.loop(Phaser.Timer.SECOND, this.timeUp, this) 
 
-      // Every second loop to addSeal
+      // Every second loop to addSeal and addSwimmer
       this.game.time.events.loop(Phaser.Timer.SECOND, this.addSeal, this)
+      this.game.time.events.loop(Phaser.Timer.SECOND*10, this.addSwimmer, this)
 
       // Set timer
       // this.timer = this.game.time.events.loop(Math.random()*100), this.add_seal, this);  
@@ -75,21 +77,31 @@ game_state.main.prototype = {
     update: function() {
       // if shark and seal overlap, seal is eaten
       this.game.physics.overlap(this.shark, this.seal, this.eat, null, this);
+      // if shark and swimmer overlap, swimmer is "eaten"
+      this.game.physics.overlap(this.shark, this.swimmer, this.eat, null, this);
 
       // game end state is health reaching zero
       if (this.health <= 0) { this.restart_game() }
     },
 
     addSeal: function() {
-      // Display moving seal sprite at position 0, 0
+      // Display moving seal sprite at a random position at 0 on the x-axis
       this.seal = this.game.add.sprite(0, (Math.floor(Math.random()*400)+70), 'seal');
       this.seal.animations.add('right', [0, 1, 2], 3, true);
       this.seal.animations.play('right');
       // Add velocity to the seal to make it swim right
-      this.seal.body.velocity.x = +(Math.floor(Math.random()*500)+200); 
+      this.seal.body.velocity.x = +(Math.floor(Math.random()*400)+300); 
       // Kill the seal when it's no longer visible 
       this.seal.outOfBoundsKill = true;
+    },
 
+    addSwimmer: function() {
+      // Display swimmer sprite at a random position at 0 on the x-axis
+      this.swimmer = this.game.add.sprite(0, (Math.floor(Math.random()*600)+70), 'swimmer');
+      // Add velocity to the swimmer to make it swim right
+      this.swimmer.body.velocity.x = +(Math.floor(Math.random()*200)+200); 
+      // Kill the swimmer when it's no longer visible 
+      this.swimmer.outOfBoundsKill = true;
     },
 
     // Destroys food, affects points
@@ -98,7 +110,9 @@ game_state.main.prototype = {
         this.seal.kill();
         this.health += 5;
         this.score += 50;
-      }
+      } else if (food == this.swimmer)
+        this.health -= 5;
+        this.score -= 25;
     },
 
     timeUp: function() {
