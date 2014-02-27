@@ -70,24 +70,19 @@ game_state.main.prototype = {
       left_key.onUp.add(this.stop_moving, this);
 
       // Display moving seal sprite at position 0, 0
-      this.seal = this.game.add.sprite(0, 50, 'seal');
+      this.seal = this.game.add.sprite(0, (Math.floor(Math.random()*400)+70), 'seal');
       this.seal.animations.add('right', [0, 1, 2], 3, true);
       this.seal.animations.play('right');
-
-      // Add a group of seals
-      // this.seals = game.add.group();  
-      // this.seals.createMultiple(3, 'seal'); 
-      // this.seal.add_seal(0, 5);
+      // Add velocity to the seal to make it swim right
+      this.seal.body.velocity.x = +(Math.floor(Math.random()*500)+200); 
+      // Kill the seal when it's no longer visible 
+      this.seal.outOfBoundsKill = true;
 
         // add_seal: function(x, y){
         //   // Get the first dead seal of our group (they default to dead)
         //   var seal = this.seals.getFirstDead();
         //   // Set the new position of the seal
         //   seal.reset(x, y);
-        //   // Add velocity to the seal to make it swim right
-        //   seal.body.velocity.x = +200; 
-        //   // Kill the seal when it's no longer visible 
-        //   seal.outOfBoundsKill = true;
         // },
 
         // add_row_of_seals: function() {  
