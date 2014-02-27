@@ -18,11 +18,9 @@ game_state.main.prototype = {
     // this.game.load.image('ocean', 'assets/water.jpg');
     
     // Load the shark sprite
-    this.game.load.spritesheet('shark', '/assets/sharksprite.png', 268, 0);
-
+    this.game.load.spritesheet('shark', '/assets/sharksprite.png', 160, 0);
     // Load bait sprites
-    this.game.load.spritesheet('seal', '/assets/seal.png', 0, 141);
-
+    this.game.load.spritesheet('seal', '/assets/seal.png', 0, 79);
     },
 
     // Function called after 'preload' to set up the game
@@ -46,8 +44,8 @@ game_state.main.prototype = {
 
       // Display moving shark on screen
       this.shark = this.game.add.sprite(this.game.width/2, this.game.height/2, 'shark');
-      this.shark.animations.add('always', [0, 1], 2, true);
-      this.shark.animations.play('always');
+      this.shark.animations.add('swim', [0, 1], 2, true);
+      this.shark.animations.play('swim');
       /// Shark cannot move outside of the game world
       this.shark.body.collideWorldBounds = true;
 
@@ -81,8 +79,10 @@ game_state.main.prototype = {
     
     // Function called 60 times per second
     update: function() {
+      // if shark and seal overlap, seal is eaten
       this.game.physics.overlap(this.shark, this.seal, this.eat, null, this);
 
+      // game end state is health reaching zero
       if (this.health <= 0) { this.restart_game() }
     },
 
@@ -90,10 +90,11 @@ game_state.main.prototype = {
     eat: function (shark, seal) {
       seal.kill();
       this.health += 5;
+      this.score += 50;
     },
 
     timeUp: function() {
-       this.score += 1;
+       this.score += 100;
        this.score_text.content = 'Score: ' + this.score;
        this.health -= 1;
        this.health_text.content = 'Health: ' + this.health;
