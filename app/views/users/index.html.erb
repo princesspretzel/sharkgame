@@ -1,3 +1,7 @@
 <div id="game_div">
 <!--   <div class="shark_left"></div> -->
 </div>
+
+<% if current_user %> 
+  <%= javascript_include_tag "game" %>
+<% end %>

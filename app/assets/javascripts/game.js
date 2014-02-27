@@ -38,6 +38,9 @@ game_state.main.prototype = {
       var style = { font: "40px Helvetica", fill: "#00000" };  
       this.score_label = this.game.add.text(300, 30, "Health: 100", style);
 
+      // Set timer
+      // this.timer = this.game.time.events.loop(Math.random()*100), this.add_seal, this);  
+
       // Display ocean background
       // this.background = this.game.add.sprite(0, 0, 'ocean');
 
@@ -66,25 +69,34 @@ game_state.main.prototype = {
       left_key.onDown.add(this.move_left, this);
       left_key.onUp.add(this.stop_moving, this);
 
-      // Add seal sprite at position 0, 0
-      this.game.add.sprite(0, 50, 'seal');
-      this.seal.animations.add('right', [0, 1, 2], 1, true);
+      // Display moving seal sprite at position 0, 0
+      this.seal = this.game.add.sprite(0, 50, 'seal');
+      this.seal.animations.add('right', [0, 1, 2], 3, true);
       this.seal.animations.play('right');
 
       // Add a group of seals
-      this.seals = game.add.group();  
-      this.pipes.createMultiple(3, 'seal'); 
-    },
+      // this.seals = game.add.group();  
+      // this.seals.createMultiple(3, 'seal'); 
+      // this.seal.add_seal(0, 5);
 
-    add_one_seal: function(x, y){
-      // Get the first dead seal of our group (they default to dead)
-      var seal = this.seals.getFirstDead();
-      // Set the new position of the seal
-      seal.reset(x, y);
-      // Add velocity to the seal to make it swim right
-      seal.body.velocity.x = 200; 
-      // Kill the seal when it's no longer visible 
-      seal.outOfBoundsKill = true;
+        // add_seal: function(x, y){
+        //   // Get the first dead seal of our group (they default to dead)
+        //   var seal = this.seals.getFirstDead();
+        //   // Set the new position of the seal
+        //   seal.reset(x, y);
+        //   // Add velocity to the seal to make it swim right
+        //   seal.body.velocity.x = +200; 
+        //   // Kill the seal when it's no longer visible 
+        //   seal.outOfBoundsKill = true;
+        // },
+
+        // add_row_of_seals: function() {  
+        // var hole = Math.floor(Math.random()*3)+1;
+
+        // for (var i = 0; i < 8; i++)
+        //    if (i != hole && i != hole +1) 
+        //    this.add_one_seal(0, 0);   
+        // },
     },
     
     // Function called 60 times per second
