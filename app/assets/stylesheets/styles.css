@@ -1,0 +1,26 @@
+html { 
+  background: url(../../assets/water.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
+}
+
+#game_div {
+  height: 100%;
+  width: 100%;
+}
+
+/*.shark_left {
+  width: 268px;
+  height: 304px;
+  background: url(../../assets/sharksprite.png);
+}
+
+.shark_right {
+  width: 268px;
+  height: 304px;
+  background: url(../../assets/sharksprite.png) 268px 0px;
+}*/
