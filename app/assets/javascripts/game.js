@@ -8,8 +8,8 @@ game_state.main = function() { };
 
 game_state.main.prototype = {
 
-    preload: function() { 
     // Function called first to load all the assets
+    preload: function() { 
 
     // Change the background color of the game
     this.game.stage.backgroundColor = '00FFFF';
@@ -29,14 +29,14 @@ game_state.main.prototype = {
     create: function() { 
 
       // Display score
-      this.score = 0;  
-      var style = { font: "40px Helvetica", fill: "#00000" };  
-      this.score_label = this.game.add.text(50, 30, "Score: 0", style);    
-      
+      this.score = 0;    
+      this.score_text = this.game.add.text(50, 30, "Score: 0", { font: "40px Helvetica", fill: "#00000" });   
       // Set health: game end determinant
-      this.health = 0;
-      var style = { font: "40px Helvetica", fill: "#00000" };  
-      this.score_label = this.game.add.text(300, 30, "Health: 100", style);
+      this.health = 100; 
+      this.health_text = this.game.add.text(300, 30, "Health: 100", { font: "40px Helvetica", fill: "#00000" });
+
+      // Every second loop to timeUp for constant health and score updating
+      this.game.time.events.loop(Phaser.Timer.SECOND, this.timeUp, this) 
 
       // Set timer
       // this.timer = this.game.time.events.loop(Math.random()*100), this.add_seal, this);  
@@ -87,6 +87,14 @@ game_state.main.prototype = {
     // Destroys seals
     eat: function (shark, seal) {
       seal.kill();
+      this.health += 5;
+    },
+
+    timeUp: function() {
+       this.score += 1;
+       this.score_text.content = 'Score: ' + this.score;
+       this.health -= 1;
+       this.health_text.content = 'Health: ' + this.health;
     },
 
     // Make the shark go up 
