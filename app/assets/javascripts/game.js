@@ -82,6 +82,8 @@ game_state.main.prototype = {
     // Function called 60 times per second
     update: function() {
       this.game.physics.overlap(this.shark, this.seal, this.eat, null, this);
+
+      if (this.health <= 0) { this.restart_game() }
     },
 
     // Destroys seals
