@@ -18,9 +18,9 @@ game_state.main.prototype = {
     // this.game.load.image('ocean', 'assets/water.jpg');
     
     // Load the shark sprite
-    this.game.load.spritesheet('shark', '/assets/sharksprite.png', 160, 0);
+    this.game.load.spritesheet('shark', '/assets/shark.png', 160, 0);
     // Load bait sprites
-    this.game.load.spritesheet('seal', '/assets/seal.png', 0, 79);
+    this.game.load.spritesheet('seal', '/assets/seal_right.png', 0, 79);
     },
 
     // Function called after 'preload' to set up the game
@@ -35,6 +35,9 @@ game_state.main.prototype = {
 
       // Every second loop to timeUp for constant health and score updating
       this.game.time.events.loop(Phaser.Timer.SECOND, this.timeUp, this) 
+
+      // Every second loop to addSeal
+      this.game.time.events.loop(Phaser.Timer.SECOND, this.addSeal, this)
 
       // Set timer
       // this.timer = this.game.time.events.loop(Math.random()*100), this.add_seal, this);  
@@ -66,15 +69,6 @@ game_state.main.prototype = {
       var left_key = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
       left_key.onDown.add(this.move_left, this);
       left_key.onUp.add(this.stop_moving, this);
-
-      // Display moving seal sprite at position 0, 0
-      this.seal = this.game.add.sprite(0, (Math.floor(Math.random()*400)+70), 'seal');
-      this.seal.animations.add('right', [0, 1, 2], 3, true);
-      this.seal.animations.play('right');
-      // Add velocity to the seal to make it swim right
-      this.seal.body.velocity.x = +(Math.floor(Math.random()*500)+200); 
-      // Kill the seal when it's no longer visible 
-      this.seal.outOfBoundsKill = true;
     },
     
     // Function called 60 times per second
@@ -86,11 +80,25 @@ game_state.main.prototype = {
       if (this.health <= 0) { this.restart_game() }
     },
 
-    // Destroys seals
-    eat: function (shark, seal) {
-      seal.kill();
-      this.health += 5;
-      this.score += 50;
+    addSeal: function() {
+      // Display moving seal sprite at position 0, 0
+      this.seal = this.game.add.sprite(0, (Math.floor(Math.random()*400)+70), 'seal');
+      this.seal.animations.add('right', [0, 1, 2], 3, true);
+      this.seal.animations.play('right');
+      // Add velocity to the seal to make it swim right
+      this.seal.body.velocity.x = +(Math.floor(Math.random()*500)+200); 
+      // Kill the seal when it's no longer visible 
+      this.seal.outOfBoundsKill = true;
+
+    },
+
+    // Destroys food, affects points
+    eat: function (shark, food) {
+      if (food == this.seal) {
+        this.seal.kill();
+        this.health += 5;
+        this.score += 50;
+      }
     },
 
     timeUp: function() {
