@@ -119,13 +119,13 @@ game_state.main.prototype = {
         this.seal.kill();
         this.health += 1;
         this.score += 5;
-      } else if (food == this.swimmer)
-        this.health -= 5;
-        this.score -= 10;
+      } //else if (food == this.swimmer)
+        //this.health -= 5;
+        //this.score -= 10;
     },
 
     timeUp: function() {
-       this.score += 100;
+       // this.score += 100;
        this.score_text.content = 'Score: ' + this.score;
        this.health -= 1;
        this.health_text.content = 'Health: ' + this.health;

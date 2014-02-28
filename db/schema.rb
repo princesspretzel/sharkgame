@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20140225002901) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.integer  "high_score"
-    t.integer  "num_plays"
+    t.integer  "high_score",             default: 0
+    t.integer  "num_plays",              default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
