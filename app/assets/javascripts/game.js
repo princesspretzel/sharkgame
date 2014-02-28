@@ -35,14 +35,11 @@ game_state.main.prototype = {
       this.health_text = this.game.add.text(300, 30, "Health: 100", { font: "40px Helvetica", fill: "#00000" });
 
       // Every second loop to timeUp for constant health and score updating
-      this.game.time.events.loop(Phaser.Timer.SECOND, this.timeUp, this) 
+      this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.timeUp, this) 
 
-      // Every second loop to addSeal and addSwimmer
-      this.game.time.events.loop(Phaser.Timer.SECOND, this.addSeal, this)
-      this.game.time.events.loop(Phaser.Timer.SECOND*10, this.addSwimmer, this)
-
-      // Set timer
-      // this.timer = this.game.time.events.loop(Math.random()*100), this.add_seal, this);  
+      // Every loop through time randomly to addSeal and addSwimmer
+      this.seal_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*10), this.addSeal, this);
+      this.swimmer_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*100), this.addSwimmer, this); 
 
       // Display ocean background
       // this.background = this.game.add.sprite(0, 0, 'ocean');
@@ -54,7 +51,7 @@ game_state.main.prototype = {
       /// Shark cannot move outside of the game world
       this.shark.body.collideWorldBounds = true;
 
-      // Controls to move the shark up, down, left, and right
+      // Add keys to move the shark up, down, left, and right
       var up_key = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
       up_key.onDown.add(this.move_up, this);
       // On key release, movement stops
@@ -71,6 +68,18 @@ game_state.main.prototype = {
       var left_key = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
       left_key.onDown.add(this.move_left, this);
       left_key.onUp.add(this.stop_moving, this);
+
+      // Accounts for diagonal movement
+      if (up_key.isDown) {
+        player.body.velocity.y = -250;
+      } else if (down_key.isDown) {
+        player.body.velocity.y = 250;
+      }
+      if (left_key.isDown) {
+        player.body.velocity.x = -250;
+      } else if (right_key.isDown) {
+        player.body.velocity.x = 250;
+      }
     },
     
     // Function called 60 times per second
@@ -108,11 +117,11 @@ game_state.main.prototype = {
     eat: function (shark, food) {
       if (food == this.seal) {
         this.seal.kill();
-        this.health += 5;
-        this.score += 50;
+        this.health += 1;
+        this.score += 5;
       } else if (food == this.swimmer)
         this.health -= 5;
-        this.score -= 25;
+        this.score -= 10;
     },
 
     timeUp: function() {
@@ -125,25 +134,25 @@ game_state.main.prototype = {
     // Make the shark go up 
     move_up: function() {  
       // Add a vertical velocity to the shark
-      this.shark.body.velocity.y = -200;
+      this.shark.body.velocity.y = -250;
     },
 
     // Make the shark go down
     move_down: function() {  
       // Add a vertical velocity to the shark
-      this.shark.body.velocity.y = +200;
+      this.shark.body.velocity.y = +250;
     },
 
     // Make the shark go right
     move_right: function() {  
       // Add a horizontal velocity to the shark
-      this.shark.body.velocity.x = +200;
+      this.shark.body.velocity.x = +250;
     },
 
     // Make the shark go left
     move_left: function() {  
       // Add a horizontal velocity to the shark
-      this.shark.body.velocity.x = -200;
+      this.shark.body.velocity.x = -250;
     },
 
     // Make shark stop moving
@@ -154,8 +163,10 @@ game_state.main.prototype = {
 
     // Restart the game
     restart_game: function() {  
-      // Reset timer
-      this.game.time.events.remove(this.timer); 
+      // Reset timers
+      this.game.time.events.remove(this.timer);
+      this.game.time.events.remove(this.seal_timer);
+      this.game.time.events.remove(this.swimmer_timer); 
       // Start the 'main' state, which restarts the game
       this.game.state.start('main');
     },
