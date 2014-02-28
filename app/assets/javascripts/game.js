@@ -31,15 +31,15 @@ game_state.main.prototype = {
       this.score = 0;    
       this.score_text = this.game.add.text(50, 30, "Score: 0", { font: "40px Helvetica", fill: "#00000" });   
       // Set health: game end determinant
-      this.health = 100; 
+      this.health = 10; 
       this.health_text = this.game.add.text(300, 30, "Health: 100", { font: "40px Helvetica", fill: "#00000" });
 
       // Every second loop to timeUp for constant health and score updating
-      this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.timeUp, this) 
+      this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.healthBar, this) 
 
       // Every loop through time randomly to addSeal and addSwimmer
       this.seal_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*10), this.addSeal, this);
-      this.swimmer_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*100), this.addSwimmer, this); 
+      this.swimmer_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*30), this.addSwimmer, this); 
 
       // Display ocean background
       // this.background = this.game.add.sprite(0, 0, 'ocean');
@@ -71,14 +71,14 @@ game_state.main.prototype = {
 
       // Accounts for diagonal movement
       if (up_key.isDown) {
-        player.body.velocity.y = -250;
+        player.body.velocity.y = -400;
       } else if (down_key.isDown) {
-        player.body.velocity.y = 250;
+        player.body.velocity.y = 400;
       }
       if (left_key.isDown) {
-        player.body.velocity.x = -250;
+        player.body.velocity.x = -400;
       } else if (right_key.isDown) {
-        player.body.velocity.x = 250;
+        player.body.velocity.x = 400;
       }
     },
     
@@ -99,7 +99,7 @@ game_state.main.prototype = {
       this.seal.animations.add('right', [0, 1, 2], 3, true);
       this.seal.animations.play('right');
       // Add velocity to the seal to make it swim right
-      this.seal.body.velocity.x = +(Math.floor(Math.random()*400)+300); 
+      this.seal.body.velocity.x = +(Math.floor(Math.random()*400)+600); 
       // Kill the seal when it's no longer visible 
       this.seal.outOfBoundsKill = true;
     },
@@ -108,7 +108,7 @@ game_state.main.prototype = {
       // Display swimmer sprite at a random position at 0 on the x-axis
       this.swimmer = this.game.add.sprite(0, (Math.floor(Math.random()*600)+70), 'swimmer');
       // Add velocity to the swimmer to make it swim right
-      this.swimmer.body.velocity.x = +(Math.floor(Math.random()*200)+200); 
+      this.swimmer.body.velocity.x = +(Math.floor(Math.random()*300)+400); 
       // Kill the swimmer when it's no longer visible 
       this.swimmer.outOfBoundsKill = true;
     },
@@ -119,14 +119,15 @@ game_state.main.prototype = {
         this.seal.kill();
         this.health += 1;
         this.score += 5;
-      } //else if (food == this.swimmer)
-        //this.health -= 5;
-        //this.score -= 10;
+      } else if (food == this.swimmer) {
+        this.swimmer.kill();
+        this.health -= 5;
+        this.score -= 10;
+      }
+      this.score_text.content = 'Score: ' + this.score; 
     },
 
-    timeUp: function() {
-       // this.score += 100;
-       this.score_text.content = 'Score: ' + this.score;
+    healthBar: function() {
        this.health -= 1;
        this.health_text.content = 'Health: ' + this.health;
     },
@@ -161,8 +162,24 @@ game_state.main.prototype = {
       this.shark.body.velocity.y = 0;
     },
 
+    // Ajax call to send score to database
+    send_score: function() {
+      var self = this;
+      $.ajax({
+        type: "POST",
+        url: "/score",
+        data: {points: self.score},
+        dataType: "json",
+        success: function(data) {
+          console.log(data);
+          //$('#game_div').html(data);
+        }
+      })
+    },
+
     // Restart the game
     restart_game: function() {  
+      this.send_score()
       // Reset timers
       this.game.time.events.remove(this.timer);
       this.game.time.events.remove(this.seal_timer);
