@@ -39,6 +39,8 @@ game_state.main.prototype = {
       this.maxHealth = 100;
       this.healthbar = this.game.add.sprite(150, 35, 'healthbar');
       this.health_text = this.game.add.text(50, 30, "Health: ", { font: "30px Helvetica", fill: "#00000" });
+      // Set placeholder for end of game screen
+      this.end_text = this.game.add.text(50, 60, " ", { font: "30px Helvetica", fill: "#00000" });
 
       // Every second loop to timeUp for constant health and score updating
       this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.healthBar, this) 
@@ -75,6 +77,10 @@ game_state.main.prototype = {
       left_key.onDown.add(this.move_left, this);
       left_key.onUp.add(this.stop_moving, this);
 
+      // Allows for game restart
+      var enter_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+      enter_key.onDown.add(this.restart_game, this);
+
       // Accounts for diagonal movement
       if (up_key.isDown) {
         player.body.velocity.y = -400;
@@ -96,7 +102,7 @@ game_state.main.prototype = {
       this.game.physics.overlap(this.shark, this.swimmer, this.eat, null, this);
 
       // game end state is health reaching zero
-      if (this.health <= 0) { this.restart_game() }
+      if (this.health <= 0) { this.end_game() }
     },
 
     addSeal: function() {
@@ -192,16 +198,21 @@ game_state.main.prototype = {
       })
     },
 
-    // Restart the game
-    restart_game: function() {  
+    // End of game
+    end_game: function() {
       this.send_score()
       // Reset timers
       this.game.time.events.remove(this.timer);
       this.game.time.events.remove(this.seal_timer);
-      this.game.time.events.remove(this.swimmer_timer); 
+      this.game.time.events.remove(this.swimmer_timer);
+      this.end_text.content = "You lose! Your score was " + this.score + " , press enter to play again!"; 
+    },
+
+    // Restart the game
+    restart_game: function() {  
       // Start the 'main' state, which restarts the game
       this.game.state.start('main');
-    },
+    }
 };
 
 // Add and start the 'main' state to start the game
