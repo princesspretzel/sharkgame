@@ -12,6 +12,55 @@ body {
   font-family: Helvetica;
 }
 
-#copy {
+a {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  padding: 5px;
+}
+
+#header {
+  margin-left: 5%; 
+  margin-top: 5%;
+}
+
+#bludkin {
+  color: maroon;
+}
+
+#container {
+  width: 100%;
+  display: inline-block;
+}
+
+#sign {
+  width: 40%;
+  float: left;
+  margin-left: 10%;
+}
+
+#instructions {
+  width: 40%;
   float: right;
+  margin-right: 10%;
+  margin-bottom: 10%
+}
+
+#copy {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20%;
+  background-color: lightgoldenrodyellow;
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 25px;
 }
