@@ -1,0 +1,47 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, :autofocus => true %></div>
+
+  <div><%= f.label :password %><br />
+  <%= f.password_field :password %></div>
+
+  <div><%= f.label :password_confirmation %><br />
+  <%= f.password_field :password_confirmation %></div>
+
+  <div><%= f.submit "Sign up" %></div>
+<% end %>
+
+<%= render "devise/shared/links" %>
+
+
+<div id="copy">
+
+<h3>Instructions: </h3>
+
+<ul>
+<li>SIGN UP & IN TO RECORD YOUR PLAY COUNT & HIGH SCORE.</li>
+<li>CONTROL THE SHARK WITH THE ARROW KEYS.</li>
+<li>EAT SEALS, NOT PEOPLE.</li>
+<li>STAY ALIVE AS LONG AS YOU CAN.</li>
+<li>HAVE FUN, EMPATHIZE, DON’T BE A HATER.</li>
+</ul>
+
+<h3> Why I Made This Game / What I Want You to Get Out of It: </h3>
+
+<p>An aura of fear surrounds most sharks, but none so much as the Great White. Their infamy was created in part by the popular classic “Jaws” and its many follow-ups, and in part by the visceral reaction that any predator will have when confronted with its superior. A hysterical fear has been sown, and its only victim is the Great White Shark population, which maintains only spotty protection under many laws, despite its “vulnerable” status.</p>
+
+<p>Some of the ways they are suffering: Great Whites are apex predators and therefore highly susceptible to over-fishing. It takes an enormous amount of energy to keep them moving, and move they must, in order to pass oxygen over their gills so they can breathe. Aquariums and researchers have attempted to keep them in captivity, and have proven that the Great White cannot survive in confinement. They are popular trophy-kills for human fisherman, and this soothes rather than troubles the shark-fearing public.</p>
+
+</p>Though they are reportedly responsible for most fatal attacks on humans, many of these reports come from victims who are not trained to recognize the differences between shark species (and are hopped-up on adrenaline at the time of “identification”). The reputation of the Great White is propagated thus, when in fact human beings, with our high bone-to-fat ratio, are not the ideal prey for the Great White’s slow digestive system at all. Most attacks are in fact “test bites,” with the shark swimming away after the first (and only) hit.</p>
+
+<p>Our decades-old misunderstanding with the sharks is mainly the product of the unfortunate fact that they basically have teeth for hands. Not everyone can be born with opposable thumbs. Check your privilege.</p>
+
+<h3>TL;DR:</h3>
+
+<p>Great White Sharks are not monsters, and they don’t want to eat you. <a href="placeholder">Period.</a></p>
+
+</div>

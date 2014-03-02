@@ -2,7 +2,7 @@ html {
   background: url(../../assets/water.png) no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
-  -o-background-size: cover;
+  -o-background-size: cover;s
   background-size: cover;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
   -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
@@ -10,4 +10,8 @@ html {
 
 body {
   font-family: Helvetica;
+}
+
+#copy {
+  float: right;
 }
