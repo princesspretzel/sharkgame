@@ -16,7 +16,11 @@ game_state.main.prototype = {
 
     // Change background to picture of the ocean
     // this.game.load.image('ocean', 'assets/water.jpg');
-    
+
+    // Load health bar sprite
+    this.game.load.image('healthbar', '/assets/healthBar.png') 
+    // Load blood sprite
+    this.game.load.image('blood', '/assets/blood.png')   
     // Load the shark sprite
     this.game.load.spritesheet('shark', '/assets/shark.png', 160, 0);
     // Load bait sprites
@@ -29,10 +33,12 @@ game_state.main.prototype = {
 
       // Display score
       this.score = 0;    
-      this.score_text = this.game.add.text(50, 30, "Score: 0", { font: "40px Helvetica", fill: "#00000" });   
+      this.score_text = this.game.add.text(260, 30, "Score: 0", { font: "30px Helvetica", fill: "#00000" });   
       // Set health: game end determinant
-      this.health = 10; 
-      this.health_text = this.game.add.text(300, 30, "Health: 100", { font: "40px Helvetica", fill: "#00000" });
+      this.health = 100;
+      this.maxHealth = 100;
+      this.healthbar = this.game.add.sprite(150, 35, 'healthbar');
+      this.health_text = this.game.add.text(50, 30, "Health: ", { font: "30px Helvetica", fill: "#00000" });
 
       // Every second loop to timeUp for constant health and score updating
       this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.healthBar, this) 
@@ -116,10 +122,18 @@ game_state.main.prototype = {
     // Destroys food, affects points
     eat: function (shark, food) {
       if (food == this.seal) {
+        // Add blood sprite where shark was, offset by 200 to account for size of shark transparency layer
+        this.blood = this.game.add.sprite(this.shark.x - 200, this.shark.y - 200, 'blood');
+        this.blood.animations.add('die', 60, false, false);
+        this.blood.animations.play('die');
         this.seal.kill();
         this.health += 1;
         this.score += 5;
       } else if (food == this.swimmer) {
+        // Add blood sprite where shark was, offset by 200 to account for size of shark transparency layer
+        this.blood = this.game.add.sprite(this.shark.x - 200, this.shark.y - 200, 'blood');
+        this.blood.animations.add('die', 60, false, false);
+        this.blood.animations.play('die');
         this.swimmer.kill();
         this.health -= 5;
         this.score -= 10;
@@ -128,8 +142,9 @@ game_state.main.prototype = {
     },
 
     healthBar: function() {
-       this.health -= 1;
-       this.health_text.content = 'Health: ' + this.health;
+      this.health -= 1;
+      this.healthbar.cropEnabled = true;
+      this.healthbar.crop.width = (this.health / this.maxHealth) * this.healthbar.width;
     },
 
     // Make the shark go up 
