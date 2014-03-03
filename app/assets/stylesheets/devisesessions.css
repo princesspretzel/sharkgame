@@ -1,14 +1,5 @@
-html { 
-  background: url(../../assets/water.png) no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
-  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
-}
-
 body {
+  background-color: aqua;
   font-family: Helvetica;
 }
 
@@ -60,9 +51,18 @@ li {
 }
 
 #copy {
+
+  background: url(../../assets/water.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
+
+  color: black;
   width: 80%;
   margin: 0 auto;
-  background-color: lightgoldenrodyellow;
   border: 2px solid black;
   border-radius: 25px;
   padding: 25px;
