@@ -11,6 +11,8 @@ game_state.main.prototype = {
     // Function called first to load all the assets
     preload: function() { 
 
+    this.game.reported = false;
+
     // Change the background color of the game
     this.game.stage.backgroundColor = '00FFFF';
 
@@ -193,14 +195,17 @@ game_state.main.prototype = {
         dataType: "json",
         success: function(data) {
           console.log(data);
-          //$('#game_div').html(data);
         }
       })
     },
 
     // End of game
     end_game: function() {
-      this.send_score()
+      if (!this.game.reported){
+        this.send_score();
+        console.log(this.game.reported)
+        this.game.reported = true;
+      }
       // Reset timers
       this.game.time.events.remove(this.timer);
       this.game.time.events.remove(this.seal_timer);

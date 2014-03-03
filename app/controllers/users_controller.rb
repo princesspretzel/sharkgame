@@ -1,11 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    # users = User.all
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render :json => users}
-    # end
+
   end
 
   def score
@@ -14,6 +10,7 @@ class UsersController < ApplicationController
     if current_user.high_score < points
       current_user.high_score = points
     end
+
     current_user.num_plays += 1
 
     current_user.save!
@@ -21,5 +18,16 @@ class UsersController < ApplicationController
     render json: current_user  
 
   end
+
+  # def plays
+
+  #   plays = params['plays'].to_i
+  #   current_user.num_plays += plays
+
+  #   current_user.save!
+
+  #   render json: current_user
+
+  # end
 
 end

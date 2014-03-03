@@ -68,5 +68,12 @@ li {
   clear: both;
 }
 
+#stats {
+  width: 40%;
+  float: right;
+  margin-right: 10%;
+  min-height: 5%;
+  max-height: 10%;
+}
 
 

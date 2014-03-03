@@ -4,6 +4,8 @@ Shark::Application.routes.draw do
   
   devise_for :users
 
+  # post "/plays" => "users#plays"
+
   post "/score" => "users#score" 
 
   # The priority is based upon order of creation: first created -> highest priority.
