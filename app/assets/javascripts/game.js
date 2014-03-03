@@ -33,12 +33,12 @@ game_state.main.prototype = {
 
       // Display score
       this.score = 0;    
-      this.score_text = this.game.add.text(260, 30, "Score: 0", { font: "30px Helvetica", fill: "#00000" });   
+      this.score_text = this.game.add.text(260, 0, "Score: 0", { font: "30px Helvetica", fill: "#00000" });   
       // Set health: game end determinant
       this.health = 100;
       this.maxHealth = 100;
-      this.healthbar = this.game.add.sprite(150, 35, 'healthbar');
-      this.health_text = this.game.add.text(50, 30, "Health: ", { font: "30px Helvetica", fill: "#00000" });
+      this.healthbar = this.game.add.sprite(150, 5, 'healthbar');
+      this.health_text = this.game.add.text(50, 0, "Health: ", { font: "30px Helvetica", fill: "#00000" });
       // Set placeholder for end of game screen
       this.end_text = this.game.add.text(50, 60, " ", { font: "30px Helvetica", fill: "#00000" });
 

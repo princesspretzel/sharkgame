@@ -1,4 +1,12 @@
 <div id="game_div">
+  <div id="user_div">
+    <% if current_user %>
+      <% if user_signed_in? %>
+        <li class="active"> <%= link_to current_user.email, edit_user_registration_path(current_user), "data-toggle" => "modal"  %></li>
+        <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 
 <% if current_user %> 

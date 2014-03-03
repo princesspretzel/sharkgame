@@ -2,3 +2,24 @@ body {
   font-family: Helvetica;
   background-color: aqua;
 }
+
+li {
+  list-style-type: none;
+}
+
+#game_div {
+  width: 100%;
+}
+
+#user_div {
+  float: right;
+  width: 20%;
+}
+
+a {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}

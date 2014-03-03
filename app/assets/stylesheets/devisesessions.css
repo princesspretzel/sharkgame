@@ -46,20 +46,25 @@ li {
   width: 40%;
   float: left;
   margin-left: 10%;
+  min-height: 5%;
+  max-height: 10%;
 }
 
 #instructions {
   width: 40%;
   float: right;
   margin-right: 10%;
+  min-height: 5%;
+  max-height: 10%;
+  display: block;
 }
 
 #copy {
   width: 80%;
   margin: 0 auto;
-  margin-top: 20%;
   background-color: lightgoldenrodyellow;
   border: 2px solid black;
   border-radius: 25px;
   padding: 25px;
+  clear: both;
 }
