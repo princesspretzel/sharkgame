@@ -25,9 +25,12 @@ game_state.main.prototype = {
     this.game.load.image('blood', '/assets/blood.png')   
     // Load the shark sprite
     this.game.load.spritesheet('shark', '/assets/shark.png', 160, 0);
-    // Load bait sprites
+    // Load bait sprites for left side
     this.game.load.spritesheet('seal', '/assets/seal_right.png', 0, 79);
     this.game.load.image('swimmer', '/assets/swimmer_right.png')
+    // Load bait sprites for right side
+    this.game.load.spritesheet('sealleft', '/assets/seal_left.png', 0, 79);
+    this.game.load.image('swimmerleft', '/assets/swimmer_left.png');
     },
 
     // Function called after 'preload' to set up the game

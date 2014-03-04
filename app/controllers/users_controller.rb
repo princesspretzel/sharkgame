@@ -19,15 +19,16 @@ class UsersController < ApplicationController
 
   end
 
-  # def plays
+  def score_json
 
-  #   plays = params['plays'].to_i
-  #   current_user.num_plays += plays
+    data = []
 
-  #   current_user.save!
+    User.all.each_with_index do |user, idx|
+        data << {winner_num: idx, email: user.email, high_score: user.high_score}
+      end
 
-  #   render json: current_user
+    render json: data 
 
-  # end
+  end
 
 end

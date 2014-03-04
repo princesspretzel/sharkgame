@@ -3,6 +3,7 @@
 </div>
 
 <div id="container">
+
   <div id="sign">
 
     <h3>EDIT</h3>
@@ -51,4 +52,17 @@
     <% end %>
 
   </div>
+
+  <div id="chart">
+    <h3> THE OTHER HIGH SCORES </h3>
+    <% if current_user %> 
+      <% if user_signed_in? %>      
+        <div id="plot-area">
+        </div>
+        <%= javascript_include_tag "chart" %>
+      <% end %>
+    <% end %>
+  
+  </div>
+
 </div>

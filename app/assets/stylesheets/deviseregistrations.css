@@ -68,12 +68,11 @@ li {
   clear: both;
 }
 
-#stats {
+#stats, #chart {
   width: 40%;
   float: right;
-  margin-right: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
   min-height: 5%;
   max-height: 10%;
 }
-
-

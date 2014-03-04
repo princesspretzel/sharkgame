@@ -13,3 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require phaser
+//= require raphael
+//= require morris
