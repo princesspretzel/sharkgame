@@ -32,6 +32,8 @@ game_state.main.prototype = {
       // Load bait sprites for right side
       this.game.load.spritesheet('sealplus', '/assets/seal_left.png', 0, 79);
       this.game.load.image('swimmerplus', '/assets/swimmer_left.png');
+      // Load tire sprite
+      this.game.load.image('tire', '/assets/tire.png');
     },
 
     // Function called after 'preload' to set up the game
