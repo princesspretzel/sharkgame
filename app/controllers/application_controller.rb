@@ -15,9 +15,15 @@ class ApplicationController < ActionController::Base
     puts "--------------------------------------"
     puts controller_name
     puts "--------------------------------------"
-    c.stylesheets << controller_name if File.exists?("#{Rails.root}/app/assets/stylesheets/#{controller_name}.css")
-    
+    c.stylesheets << controller_name if File.exists?("#{Rails.root}/app/assets/stylesheets/#{controller_name}.css")   
   end
 
+  before_filter :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_up) << :username
+  end
 
 end

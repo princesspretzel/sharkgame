@@ -17,9 +17,6 @@ game_state.main.prototype = {
       // Change the background color of the game
       this.game.stage.backgroundColor = '00FFFF';
 
-      // Change background to picture of the ocean
-      // this.game.load.image('ocean', 'assets/water.jpg');
-
       // Load health bar sprite
       this.game.load.image('healthbar', '/assets/healthBar.png') 
       // Load blood sprite

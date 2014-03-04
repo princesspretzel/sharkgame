@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(email: 'brittany@brittany.com', high_score: '640')
-User.create(email: 'omar@omar.com', high_score: '120')
-User.create(email: 'test@example.com', high_score: '35')
-User.create(email: 'julie@mejulie.com', high_score: '350')
-User.create(email: 'meglett@plunklett.com', high_score: '420')
+User.create(email: 'brittany@brittany.com', username: 'brittany', password: 'brittany', password_confirmation: 'brittany', high_score: '640')
+User.create(email: 'omar@omar.com', username: 'teechromdel', password: 'omaromar', password_confirmation: 'omaromar', high_score: '120')
+User.create(email: 'test@example.com', username: 'badatgames', password: 'vroomvroom', password_confirmation: 'vroomvroom', high_score: '35')
+User.create(email: 'julie@mejulie.com', username: 'mejulieme', password: 'mejulieme', password_confirmation: 'mejulieme', high_score: '350')
+User.create(email: 'meglett@plunklett.com', username: 'meggyplunky', password: 'meghann1', password_confirmation: 'meghann1', high_score: '420')

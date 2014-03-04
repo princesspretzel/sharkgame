@@ -13,7 +13,7 @@ $.ajax({
         // Contains colors for the bars
         barColors: ['#800000'],
         // The name of the data record attribute that contains x-values.
-        xkey: 'winner_num',
+        xkey: 'username',
         // A list of names of data record attributes that contain y-values.
         ykeys: ['high_score'],
         // Labels for the ykeys -- will be displayed when you hover over the

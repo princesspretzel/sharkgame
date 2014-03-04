@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     data = []
 
     User.all.each_with_index do |user, idx|
-        data << {winner_num: idx, email: user.email, high_score: user.high_score}
+        data << {winner_num: idx, username: user.username, email: user.email, high_score: user.high_score}
       end
 
     render json: data 
