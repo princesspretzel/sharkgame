@@ -11,26 +11,27 @@ game_state.main.prototype = {
     // Function called first to load all the assets
     preload: function() { 
 
-    this.game.reported = false;
+      this.game.reported = false;
+      this.game.sped = false;
 
-    // Change the background color of the game
-    this.game.stage.backgroundColor = '00FFFF';
+      // Change the background color of the game
+      this.game.stage.backgroundColor = '00FFFF';
 
-    // Change background to picture of the ocean
-    // this.game.load.image('ocean', 'assets/water.jpg');
+      // Change background to picture of the ocean
+      // this.game.load.image('ocean', 'assets/water.jpg');
 
-    // Load health bar sprite
-    this.game.load.image('healthbar', '/assets/healthBar.png') 
-    // Load blood sprite
-    this.game.load.image('blood', '/assets/blood.png')   
-    // Load the shark sprite
-    this.game.load.spritesheet('shark', '/assets/shark.png', 160, 0);
-    // Load bait sprites for left side
-    this.game.load.spritesheet('seal', '/assets/seal_right.png', 0, 79);
-    this.game.load.image('swimmer', '/assets/swimmer_right.png')
-    // Load bait sprites for right side
-    this.game.load.spritesheet('sealleft', '/assets/seal_left.png', 0, 79);
-    this.game.load.image('swimmerleft', '/assets/swimmer_left.png');
+      // Load health bar sprite
+      this.game.load.image('healthbar', '/assets/healthBar.png') 
+      // Load blood sprite
+      this.game.load.image('blood', '/assets/blood.png')   
+      // Load the shark sprite
+      this.game.load.spritesheet('shark', '/assets/shark.png', 160, 0);
+      // Load bait sprites for left side
+      this.game.load.spritesheet('seal', '/assets/seal_right.png', 0, 79);
+      this.game.load.image('swimmer', '/assets/swimmer_right.png')
+      // Load bait sprites for right side
+      this.game.load.spritesheet('sealplus', '/assets/seal_left.png', 0, 79);
+      this.game.load.image('swimmerplus', '/assets/swimmer_left.png');
     },
 
     // Function called after 'preload' to set up the game
@@ -106,8 +107,32 @@ game_state.main.prototype = {
       // if shark and swimmer overlap, swimmer is "eaten"
       this.game.physics.overlap(this.shark, this.swimmer, this.eat, null, this);
 
+      // speed up bait
+      if (this.score >= 100) { 
+        if (!this.game.sped) {
+          this.speed_up();
+          this.game.sped = true;
+        }
+      }
+
       // game end state is health reaching zero
       if (this.health <= 0) { this.end_game() }
+    },
+
+    speed_up: function() {
+      this.seal_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*10), this.addSealPlus, this);
+      this.swimmer_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*30), this.addSwimmerPlus, this); 
+    },
+
+    addSealPlus: function() {
+      // Display moving seal sprite at a random position at 0 on the x-axis
+      this.sealplus = this.game.add.sprite(this.game.width-100, (Math.floor(Math.random()*400)+70), 'sealplus');
+      this.sealplus.animations.add('left', [0, 1, 2], 3, true);
+      this.sealplus.animations.play('left');
+      // Add velocity to the seal to make it swim right
+      this.sealplus.body.velocity.x = -(Math.floor(Math.random()*400)+600); 
+      // Kill the seal when it's no longer visible 
+      this.sealplus.outOfBoundsKill = true;
     },
 
     addSeal: function() {
@@ -119,6 +144,15 @@ game_state.main.prototype = {
       this.seal.body.velocity.x = +(Math.floor(Math.random()*400)+600); 
       // Kill the seal when it's no longer visible 
       this.seal.outOfBoundsKill = true;
+    },
+
+    addSwimmerPlus: function() {
+      // Display swimmer sprite at a random position at 0 on the x-axis
+      this.swimmerplus = this.game.add.sprite(this.game.width-100, (Math.floor(Math.random()*600)+70), 'swimmerplus');
+      // Add velocity to the swimmer to make it swim right
+      this.swimmerplus.body.velocity.x = -(Math.floor(Math.random()*300)+400); 
+      // Kill the swimmer when it's no longer visible 
+      this.swimmerplus.outOfBoundsKill = true;
     },
 
     addSwimmer: function() {
@@ -213,7 +247,7 @@ game_state.main.prototype = {
       this.game.time.events.remove(this.timer);
       this.game.time.events.remove(this.seal_timer);
       this.game.time.events.remove(this.swimmer_timer);
-      this.end_text.content = "You lose! Your score was " + this.score + " , press enter to play again!"; 
+      this.end_text.content = "You lose! Your score was " + this.score + ", press enter to play again!"; 
     },
 
     // Restart the game
