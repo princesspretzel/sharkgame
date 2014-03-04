@@ -30,7 +30,7 @@ game_state.main.prototype = {
       this.game.load.spritesheet('sealplus', '/assets/seal_left.png', 0, 79);
       this.game.load.image('swimmerplus', '/assets/swimmer_left.png');
       // Load tire sprite
-      this.game.load.image('tire', '/assets/tire.png');
+      // this.game.load.image('tire', '/assets/tire.png');
     },
 
     // Function called after 'preload' to set up the game
@@ -51,8 +51,8 @@ game_state.main.prototype = {
       this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.healthBar, this) 
 
       // Every loop through time randomly to addSeal and addSwimmer
-      this.seal_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*10), this.addSeal, this);
-      this.swimmer_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*30), this.addSwimmer, this); 
+      this.seal_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*20), this.addSeal, this);
+      this.swimmer_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*60), this.addSwimmer, this); 
 
       // Display ocean background
       // this.background = this.game.add.sprite(0, 0, 'ocean');
@@ -119,44 +119,44 @@ game_state.main.prototype = {
     },
 
     speed_up: function() {
-      this.seal_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*10), this.addSealPlus, this);
-      this.swimmer_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*30), this.addSwimmerPlus, this); 
+      this.seal_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*20), this.addSealPlus, this);
+      this.swimmer_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*60), this.addSwimmerPlus, this); 
     },
 
     addSealPlus: function() {
       // Display moving seal sprite at a random position at 0 on the x-axis
-      this.sealplus = this.game.add.sprite(this.game.width-100, (Math.floor(Math.random()*400)+70), 'sealplus');
+      this.sealplus = this.game.add.sprite(this.game.width-100, (Math.floor(Math.random()*500)+70), 'sealplus');
       this.sealplus.animations.add('left', [0, 1, 2], 3, true);
       this.sealplus.animations.play('left');
       // Add velocity to the seal to make it swim right
-      this.sealplus.body.velocity.x = -(Math.floor(Math.random()*400)+600); 
+      this.sealplus.body.velocity.x = -(Math.floor(Math.random()*300)+600); 
       // Kill the seal when it's no longer visible 
       this.sealplus.outOfBoundsKill = true;
     },
 
     addSeal: function() {
       // Display moving seal sprite at a random position at 0 on the x-axis
-      this.seal = this.game.add.sprite(0, (Math.floor(Math.random()*400)+70), 'seal');
+      this.seal = this.game.add.sprite(0, (Math.floor(Math.random()*500)+70), 'seal');
       this.seal.animations.add('right', [0, 1, 2], 3, true);
       this.seal.animations.play('right');
       // Add velocity to the seal to make it swim right
-      this.seal.body.velocity.x = +(Math.floor(Math.random()*400)+600); 
+      this.seal.body.velocity.x = +(Math.floor(Math.random()*300)+400); 
       // Kill the seal when it's no longer visible 
       this.seal.outOfBoundsKill = true;
     },
 
     addSwimmerPlus: function() {
       // Display swimmer sprite at a random position at 0 on the x-axis
-      this.swimmerplus = this.game.add.sprite(this.game.width-100, (Math.floor(Math.random()*600)+70), 'swimmerplus');
+      this.swimmerplus = this.game.add.sprite(this.game.width-100, (Math.floor(Math.random()*500)+70), 'swimmerplus');
       // Add velocity to the swimmer to make it swim right
-      this.swimmerplus.body.velocity.x = -(Math.floor(Math.random()*300)+400); 
+      this.swimmerplus.body.velocity.x = -(Math.floor(Math.random()*300)+600); 
       // Kill the swimmer when it's no longer visible 
       this.swimmerplus.outOfBoundsKill = true;
     },
 
     addSwimmer: function() {
       // Display swimmer sprite at a random position at 0 on the x-axis
-      this.swimmer = this.game.add.sprite(0, (Math.floor(Math.random()*600)+70), 'swimmer');
+      this.swimmer = this.game.add.sprite(0, (Math.floor(Math.random()*500)+70), 'swimmer');
       // Add velocity to the swimmer to make it swim right
       this.swimmer.body.velocity.x = +(Math.floor(Math.random()*300)+400); 
       // Kill the swimmer when it's no longer visible 
