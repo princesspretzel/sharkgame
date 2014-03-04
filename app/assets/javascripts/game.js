@@ -25,7 +25,7 @@ game_state.main.prototype = {
       // Load blood sprite
       this.game.load.image('blood', '/assets/blood.png')   
       // Load the shark sprite
-      this.game.load.spritesheet('shark', '/assets/shark_spritesheet.png', 160, 0);
+      this.game.load.spritesheet('shark', '/assets/greatwhite.png', 160, 0);
       // Load bait sprites for left side
       this.game.load.spritesheet('seal', '/assets/seal_right.png', 0, 79);
       this.game.load.image('swimmer', '/assets/swimmer_right.png')
