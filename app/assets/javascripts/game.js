@@ -51,11 +51,8 @@ game_state.main.prototype = {
       this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.healthBar, this) 
 
       // Every loop through time randomly to addSeal and addSwimmer
-      this.seal_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*10), this.addSeal, this);
+      this.seal_timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.addSeal, this);
       this.swimmer_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*40), this.addSwimmer, this); 
-
-      // Display ocean background
-      // this.background = this.game.add.sprite(0, 0, 'ocean');
 
       // Display moving shark on screen
       this.shark = this.game.add.sprite(this.game.width/2, this.game.height/2, 'shark');
@@ -119,7 +116,7 @@ game_state.main.prototype = {
     },
 
     speed_up: function() {
-      this.seal_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*10), this.addSealPlus, this);
+      this.seal_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.addSealPlus, this);
       this.swimmer_plus_timer = this.game.time.events.loop(Phaser.Timer.SECOND*(Math.random()*40), this.addSwimmerPlus, this); 
     },
 
