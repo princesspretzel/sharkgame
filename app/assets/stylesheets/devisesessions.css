@@ -87,10 +87,10 @@ li {
   background-color: #97FFFF;
   color: white;
   text-shadow: 0.1em 0.1em #333;
+  text-align: center;
   margin: 0 auto;
   border: 6px solid navy;
   border-radius: 25px;
-  padding-left: 25px;
   clear: both;
 }
 
@@ -111,6 +111,5 @@ li {
   margin: 0 auto;
   border: 6px solid navy;
   border-radius: 25px;
-  padding: 25px;
   clear: both;
 }
