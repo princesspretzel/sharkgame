@@ -1,14 +1,30 @@
 body {
-  background-color: aqua;
+  background: url(../../assets/ocean.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
   font-family: Helvetica;
+  color: white;
+  text-shadow: 0.1em 0.1em #333;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+#copy h3 {
+  text-align: center;
 }
 
 a {
-  color: black;
+  color: white;
 }
 
 a:visited {
-  color: black;
+  color: white;
 }
 
 ul {
@@ -17,11 +33,6 @@ ul {
 
 li {
   padding: 5px;
-}
-
-#header {
-  margin-left: 5%; 
-  margin-top: 5%;
 }
 
 #bludkin {
@@ -37,17 +48,50 @@ li {
   width: 40%;
   float: left;
   margin-left: 10%;
+  margin-top: 5%;
   min-height: 5%;
   max-height: 10%;
 }
 
 #instructions {
   width: 40%;
-  float: right;
+  float: left;
+  margin-top: 5%;
   margin-right: 10%;
   min-height: 5%;
   max-height: 10%;
   display: block;
+}
+
+#header {
+  margin-left: 40%;
+  margin-top: 35%;
+  min-width: 10%;
+  clear: both;
+}
+
+#header p {
+  font-size: 4em;
+}
+
+#smallcopy {
+  background: url(../../assets/water.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
+
+  width: 40%;
+  background-color: #97FFFF;
+  color: white;
+  text-shadow: 0.1em 0.1em #333;
+  margin: 0 auto;
+  border: 6px solid navy;
+  border-radius: 25px;
+  padding-left: 25px;
+  clear: both;
 }
 
 #copy {
@@ -59,10 +103,13 @@ li {
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='.myBackground.jpg', sizingMethod='scale');
   -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='myBackground.jpg', sizingMethod='scale')";
 
-  color: black;
+  display: none;
+  background-color: #97FFFF;
+  color: white;
+  text-shadow: 0.1em 0.1em #333;
   width: 80%;
   margin: 0 auto;
-  border: 2px solid black;
+  border: 6px solid navy;
   border-radius: 25px;
   padding: 25px;
   clear: both;

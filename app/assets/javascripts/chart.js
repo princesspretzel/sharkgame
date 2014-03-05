@@ -20,7 +20,9 @@ $.ajax({
         // chart.
         labels: ['High Score']
       });
+    
     }
+
   })
 
 

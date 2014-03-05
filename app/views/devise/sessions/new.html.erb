@@ -1,13 +1,22 @@
-<div id="header">
-  <h1>you are a shark</h1>
-</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1435350926681643";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<%= javascript_include_tag "front" %>
 
 <div id="container">
+
   <div id="sign">
 
   <h3>SIGN IN</h3>
 
   <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
     <div><%= f.label :email %><br />
     <%= f.email_field :email, :autofocus => true %></div>
 
@@ -19,7 +28,7 @@
 
     <% if devise_mapping.rememberable? -%>
       <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-    <% end -%>
+    <% end %>
 
     <div><%= f.submit "SIGN IN" %></div>
   <% end %>
@@ -30,33 +39,44 @@
 
   <div id="instructions">
 
-    <h3> INSTRUCTIONS </h3>
-
-    <ul>
-    <li>Sign up to record your play count and highest score.</li>
-    <li>Control yourself with the arrow keys.</li>
-    <li>Eat seals, not people--or eat people, but prepare to tank your score and health.</li>
-    <li>You will lose... don't feel too bad, everything ends eventually.</li>
-    <li>Have fun, learn something, don't be a hater.</li>
-    </ul>
+    <h3> HOW TO PLAY </h3>
+    <h4> <i class="fa fa-arrows"></i> use the arrow keys to move </h4> 
+    <h4> <i class="fa fa-cutlery"></i> eat seals, not people </h4>
+    <h4> <i class="fa fa-plus-square"></i> ...or tank your score and health </h4>
+    <h4> <i class="fa fa-globe"></i> share with friends <div class="fb-share-button" data-href="http://developers.facebook.com/docs/plugins/" data-type="button_count"></div> </h4>
 
   </div>
 
+  <div id="header">
+    <p>you are a shark</p>
+  </div>
+
+  <div id="smallcopy"><h3>WHAT I WANT YOU TO GET OUT OF THIS</h3></div>
+
   <div id="copy">
-    
-    <h3> WHAT I WANT YOU TO GET OUT OF THIS </h3>
 
-    <p>An aura of fear surrounds most sharks, but none so much as the Great White. Their infamy was created in part by the popular classic “Jaws” and its many follow-ups, and in part by the visceral reaction that any predator will have when confronted with its superior. A hysterical fear has been sown, and its only victim is the Great White Shark population, which maintains only spotty protection under many laws, despite its “vulnerable” status.</p>
+    <h3 id="top">WHAT I WANT YOU TO GET OUT OF THIS</h3>
 
-    <p>Some of the ways they are suffering: Great Whites are apex predators and therefore highly susceptible to over-fishing. It takes an enormous amount of energy to keep them moving, and move they must, in order to pass oxygen over their gills so they can breathe. Aquariums and researchers have attempted to keep them in captivity, and have proven that the Great White cannot survive in confinement. They are popular trophy-kills for human fisherman, and this soothes rather than troubles the shark-fearing public.</p>
+    <p>You're probably scared of sharks. Understandable, I'd get out of the water if I saw one at the beach. They are wild animals, and obviously pretty dangerous.</p>
 
-    </p>Though they are reportedly responsible for most fatal attacks on humans, many of these reports come from victims who are not trained to recognize the differences between shark species (and are hopped-up on adrenaline at the time of “identification”). The reputation of the Great White is propagated thus, when in fact human beings, with our high bone-to-fat ratio, are not the ideal prey for the Great White’s slow digestive system at all. Most attacks are in fact “test bites,” with the shark swimming away after the first (and only) hit.</p>
+    <p>Mainly this is because they have teeth for hands. They have no better way to tell what something is than to bite it. Their teeth have a lot of sensors to tell them the characteristics of the things they've bitten. This is both a good and a bad thing.</p>
 
-    <p>Our decades-old misunderstanding with the sharks is mainly the product of the unfortunate fact that they basically have teeth for hands. Not everyone can be born with opposable thumbs. Check your privilege.</p>
+    <p>Humans don't taste good to sharks. We are a high-cost, low-profit interaction for them. Actually, sharks almost never eat people. They take a test-bite, understand that we are both vicious and way too skinny, and swim away.</p>
+
+    <p>We don't even look like food to them. There is a reason the most common shark attack victims are surfers. Surfers look like seals from below, and they tend to be out on the water during hunting time: dawn and dusk.</p>
+
+    </p> Great White Sharks are a "vulnerable" species, due to things like people hunting them for trophies or not caring if they die because they've seen Jaws. As apex predators, they're also very susceptible to over-fishing.</p>
+
+    <p>But the main reason it's a hard life being a shark: it takes an enormous amount of energy to keep them moving, and they have to move to pass oxygen over their gills... so they can breathe.</p> 
+
+    </p>You may have heard that Great Whites are responsible for most fatal attacks on humans. But it's important to recognize that many of these reports come from victims who aren't trained to recognize the differences between shark species (and are hopped-up on adrenaline at the time of identification). </p>
+
+    <p>Not everyone can be born with opposable thumbs. So if a shark decides to investigate you, which it probably won't because they are extremely cautious, you're probably going to lose a limb, but not your life.</p>
 
     <h3> TL;DR </h3>
 
-    <p>Great White Sharks are not monsters, and they don’t want to eat you. <a href="http://www.youtube.com/watch?v=gS-F4rfU4ns" id="bludkin">Period.</a></p>
+    <p>Sharks are not that bad, and they don’t want to eat you. <a href="http://www.youtube.com/watch?v=gS-F4rfU4ns" id="bludkin">Period.</a></p>
+    
   </div>
 
 </div>

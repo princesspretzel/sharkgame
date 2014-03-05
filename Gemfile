@@ -53,3 +53,7 @@ gem 'pry'
 # Allows push to Heroku for Rails 4
 
 gem 'rails_12factor', group: :production
+
+# Allows font-awesome icons to be readme
+
+gem 'font-awesome-rails'
