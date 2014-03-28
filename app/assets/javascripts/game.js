@@ -18,14 +18,14 @@ game_state.main.prototype = {
       this.game.stage.backgroundColor = '00FFFF';
 
       // Load health bar sprite
-      this.game.load.image('healthbar', '/assets/healthBar.png') 
+      this.game.load.image('healthbar', '/assets/healthBar.png'); 
       // Load blood sprite
-      this.game.load.image('blood', '/assets/blood.png')   
+      this.game.load.image('blood', '/assets/blood.png');   
       // Load the shark sprite
       this.game.load.spritesheet('shark', '/assets/greatwhite.png', 160, 0);
       // Load bait sprites for left side
       this.game.load.spritesheet('seal', '/assets/seal_right.png', 0, 79);
-      this.game.load.image('swimmer', '/assets/swimmer_right.png')
+      this.game.load.image('swimmer', '/assets/swimmer_right.png');
       // Load bait sprites for right side
       this.game.load.spritesheet('sealplus', '/assets/seal_left.png', 0, 79);
       this.game.load.image('swimmerplus', '/assets/swimmer_left.png');
@@ -48,7 +48,7 @@ game_state.main.prototype = {
       this.end_text = this.game.add.text(50, 60, " ", { font: "30px Helvetica", fill: "#00000" });
 
       // Every second loop to timeUp for constant health and score updating
-      this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.healthBar, this) 
+      this.timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.healthBar, this); 
 
       // Every loop through time randomly to addSeal and addSwimmer
       this.seal_timer = this.game.time.events.loop(Phaser.Timer.SECOND, this.addSeal, this);
@@ -81,7 +81,7 @@ game_state.main.prototype = {
 
       // Allows for game restart
       var enter_key = this.game.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-      enter_key.onDown.add(this.restart_game, this);
+      enter_key.onDown.add(this.end_game, this);
 
       // Accounts for diagonal movement
       if (up_key.isDown) {
@@ -102,6 +102,11 @@ game_state.main.prototype = {
       this.game.physics.overlap(this.shark, this.seal, this.eat, null, this);
       // if shark and swimmer overlap, swimmer is "eaten"
       this.game.physics.overlap(this.shark, this.swimmer, this.eat, null, this);
+
+      // if shark and seal overlap, seal is eaten
+      this.game.physics.overlap(this.shark, this.sealplus, this.eat, null, this);
+      // if shark and swimmer overlap, swimmer is "eaten"
+      this.game.physics.overlap(this.shark, this.swimmerplus, this.eat, null, this);
 
       // speed up bait
       if (this.score >= 100) { 
@@ -162,20 +167,20 @@ game_state.main.prototype = {
 
     // Destroys food, affects points
     eat: function (shark, food) {
-      if (food == this.seal) {
+      if (food == this.seal || this.sealplus) {
         // Add blood sprite where shark was, offset by 200 to account for size of shark transparency layer
         this.blood = this.game.add.sprite(this.shark.x - 200, this.shark.y - 200, 'blood');
         this.blood.animations.add('die', 60, false, false);
         this.blood.animations.play('die');
-        this.seal.kill();
+        food.kill();
         this.health += 1;
         this.score += 5;
-      } else if (food == this.swimmer) {
+      } else if (food == this.swimmer || this.swimmerplus) {
         // Add blood sprite where shark was, offset by 200 to account for size of shark transparency layer
         this.blood = this.game.add.sprite(this.shark.x - 200, this.shark.y - 200, 'blood');
         this.blood.animations.add('die', 60, false, false);
         this.blood.animations.play('die');
-        this.swimmer.kill();
+        food.kill();
         this.health -= 5;
         this.score -= 10;
       }
@@ -243,7 +248,9 @@ game_state.main.prototype = {
       this.game.time.events.remove(this.timer);
       this.game.time.events.remove(this.seal_timer);
       this.game.time.events.remove(this.swimmer_timer);
-      this.end_text.content = "You lose! Your score was " + this.score + ", press enter to play again!"; 
+      this.game.time.events.remove(this.seal_plus_timer);
+      this.game.time.events.remove(this.swimmer_plus_timer);
+      this.end_text.content = "GAME OVER! Your score was " + this.score + ", press enter to play again!"; 
     },
 
     // Restart the game
